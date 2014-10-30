@@ -56,9 +56,9 @@ class Hand:
 
     def __str__(self):
         # return a string representation of a hand
-        self.hand_rep = ""
+        self.hand_rep = "Hand contains "
         for i in range(len(self.hand)):
-            self.hand_rep += str(self.hand[i])
+            self.hand_rep += str(self.hand[i]) + " "
         return self.hand_rep
 
     def add_card(self, card):
