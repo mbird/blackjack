@@ -139,14 +139,13 @@ def deal():
         player_hand = Hand()
         player_hand.add_card(new_deck.deal_card())
         player_hand.add_card(new_deck.deal_card())
-        print "Player: ", player_hand, " --> ", player_hand.get_value(), " points"
+        # print "Player: ", player_hand, " --> ", player_hand.get_value(), " points"
         
         
         # deal two cards to dealer
         dealer_hand = Hand()
         dealer_hand.add_card(new_deck.deal_card())
         dealer_hand.add_card(new_deck.deal_card())
-        print "Dealer: ", dealer_hand, " --> ", dealer_hand.get_value(), " points"
         
         in_play = True
     
@@ -158,38 +157,32 @@ def hit():
     # if the hand is in play, hit the player
     if player_hand.get_value() <= 21:
          player_hand.add_card(new_deck.deal_card())
-         print "Player: ", player_hand, " --> ", player_hand.get_value(), " points"
+         # if busted, assign a message to outcome, update in_play and score
          if player_hand.get_value() > 21:
-                print "You have busted!"
                 in_play = False
                 outcome = "New deal?"
                 score -= 1
-                message = "Dealer wins!"
-    # if busted, assign a message to outcome, update in_play and score
+                message = "You went bust. Dealer wins!"
        
 def stand():
     global outcome, score, in_play, message
     if in_play == False:
-        print "Remember: You have busted!"
+        message = "Remember: You went bust!"
     else:
         while dealer_hand.get_value() < 17:
             dealer_hand.add_card(new_deck.deal_card())
-            print "Dealer: ", dealer_hand, " --> ", dealer_hand.get_value(), " points"
         if dealer_hand.get_value() > 21:
-            print "The dealer has busted!"
             outcome = "New deal?"
             score += 1
             in_play = False
-            message = "Player wins!"
+            message = "Dealer went bust. You win!"
         else:
             if player_hand.get_value() > dealer_hand.get_value():
-                print "Player wins!"
                 outcome = "New deal?"
                 score += 1
                 in_play = False
-                message = "Player wins!"
+                message = "You win!"
             else:
-                print "Dealer wins!"
                 outcome = "New deal?"
                 score -= 1
                 in_play = False
