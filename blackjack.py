@@ -88,13 +88,19 @@ class Deck:
     def shuffle(self):
         # shuffle the deck 
         # use random.shuffle()
-        random.shuffle.self.deck
+        random.shuffle(self.deck)
 
     def deal_card(self):
-        pass	# deal a card object from the deck
+        # deal a card object from the deck
+        # remember to remove the dealt card from the deck
+        return self.deck.pop(-1)
     
     def __str__(self):
-        pass	# return a string representing the deck
+        # return a string representing the deck
+        self.deck_rep = "Deck contains "
+        for i in range(len(self.deck)):
+            self.deck_rep += str(self.deck[i]) + " "
+        return self.deck_rep
 
 
 
