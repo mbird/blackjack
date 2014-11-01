@@ -70,10 +70,14 @@ class Hand:
         # count aces as 1, if the hand has an ace, then add 10 to hand value if it doesn't bust
         # compute the value of the hand, see Blackjack video
         self.value = 0
+        self.aces = 0
         for card in self.hand:
             self.value += VALUES[str(card)[1]]
-            if VALUES[str(card)[1]] == 1 and self.value + 10 <= 21:
-                self.value += 10
+            if VALUES[str(card)[1]] == 1:
+                self.aces += 1
+        if self.aces >0 and self.value + 10 <= 21:
+            self.value += 10
+            self.aces -= 1
                 
         return self.value
    
