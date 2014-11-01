@@ -179,6 +179,8 @@ def stand():
             print "The dealer has busted!"
             outcome = "New deal?"
             score += 1
+            in_play = False
+            message = "Player wins!"
         else:
             if player_hand.get_value() > dealer_hand.get_value():
                 print "Player wins!"
