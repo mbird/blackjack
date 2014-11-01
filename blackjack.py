@@ -122,14 +122,14 @@ def deal():
     player_hand = Hand()
     player_hand.add_card(new_deck.deal_card())
     player_hand.add_card(new_deck.deal_card())
-    print "Player: ", player_hand
+    print "Player: ", player_hand, " --> ", player_hand.get_value(), " points"
     
     
     # deal two cards to dealer
     dealer_hand = Hand()
     dealer_hand.add_card(new_deck.deal_card())
     dealer_hand.add_card(new_deck.deal_card())
-    print "Dealer: ", dealer_hand
+    print "Dealer: ", dealer_hand, " --> ", dealer_hand.get_value(), " points"
     
     in_play = True
 
@@ -138,7 +138,7 @@ def hit():
     # if the hand is in play, hit the player
     if player_hand.get_value() <= 21:
          player_hand.add_card(new_deck.deal_card())
-         print "Player: ", player_hand
+         print "Player: ", player_hand, " --> ", player_hand.get_value(), " points"
          if player_hand.get_value() > 21:
                 print "You have busted!"
                 in_play = False
@@ -151,7 +151,7 @@ def stand():
     else:
         while dealer_hand.get_value() < 17:
             dealer_hand.add_card(new_deck.deal_card())
-            print "Dealer: ", dealer_hand
+            print "Dealer: ", dealer_hand, " --> ", dealer_hand.get_value(), " points"
         if dealer_hand.get_value() > 21:
             print "The dealer has busted!"
         else:
