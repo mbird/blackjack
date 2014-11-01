@@ -77,9 +77,16 @@ class Hand:
         return self.value
    
     def draw(self, canvas, pos):
-        pass	# draw a hand on the canvas, use the draw method for cards
- 
-    
+        # draw a hand on the canvas, use the draw method for cards
+        for card in self.hand:
+            i = RANKS.index(str(card)[1])
+            j = SUITS.index(str(card)[0])
+            
+            card_pos = [CARD_CENTER[0] + i * CARD_SIZE[0],
+                        CARD_CENTER[1] + j * CARD_SIZE[1]]
+            canvas.draw_image(card_images, card_pos, CARD_SIZE, pos, CARD_SIZE)
+            pos[0] += 75
+        pos[0] -= len(self.hand) * 75
  
         
 # define deck class 
@@ -167,9 +174,19 @@ def stand():
 # draw handler    
 def draw(canvas):
     # test to make sure that card.draw works, replace with your code below
+    dealer_card_pos = [300, 300]
     
-    card = Card("S", "A")
-    card.draw(canvas, [300, 300])
+    for i in range(5):
+        dealer_hand.draw(canvas, dealer_card_pos)
+        
+    player_card_pos = [300, 450]
+    
+    for i in range(5):
+        player_hand.draw(canvas, player_card_pos)
+        
+    
+    
+   
 
 
 # initialization frame
