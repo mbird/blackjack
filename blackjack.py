@@ -120,28 +120,38 @@ class Deck:
 
 #define event handlers for buttons
 def deal():
-    global outcome, in_play, player_hand, dealer_hand, new_deck, message
-
-    # create and shuffle the deck
-    new_deck = Deck()
-    new_deck.shuffle()
-    
-    # deal two cards to player
-    player_hand = Hand()
-    player_hand.add_card(new_deck.deal_card())
-    player_hand.add_card(new_deck.deal_card())
-    print "Player: ", player_hand, " --> ", player_hand.get_value(), " points"
-    
-    
-    # deal two cards to dealer
-    dealer_hand = Hand()
-    dealer_hand.add_card(new_deck.deal_card())
-    dealer_hand.add_card(new_deck.deal_card())
-    print "Dealer: ", dealer_hand, " --> ", dealer_hand.get_value(), " points"
-    
-    in_play = True
-    outcome = "Hit or stand?"
+    global outcome, score, in_play, player_hand, dealer_hand, new_deck, message
     message = ""
+    outcome = "Hit or stand?"
+    
+    if in_play == True:
+        score -= 1
+        message = "Dealer wins!"
+        outcome = "New deal?"
+        in_play = False
+        
+    else:
+        # create and shuffle the deck
+        new_deck = Deck()
+        new_deck.shuffle()
+        
+        # deal two cards to player
+        player_hand = Hand()
+        player_hand.add_card(new_deck.deal_card())
+        player_hand.add_card(new_deck.deal_card())
+        print "Player: ", player_hand, " --> ", player_hand.get_value(), " points"
+        
+        
+        # deal two cards to dealer
+        dealer_hand = Hand()
+        dealer_hand.add_card(new_deck.deal_card())
+        dealer_hand.add_card(new_deck.deal_card())
+        print "Dealer: ", dealer_hand, " --> ", dealer_hand.get_value(), " points"
+        
+        in_play = True
+    
+   
+    
 
 def hit():
     global outcome, score, in_play, player_hand, dealer_hand, new_deck, message
@@ -183,10 +193,6 @@ def stand():
                 in_play = False
                 message = "Dealer wins!"
    
-    # if hand is in play, repeatedly hit dealer until his hand has value 17 or more
-
-    # assign a message to outcome, update in_play and score
-
 # draw handler    
 def draw(canvas):
     # test to make sure that card.draw works, replace with your code below
@@ -199,12 +205,14 @@ def draw(canvas):
     
     dealer_card_pos = [200, 300]
     
-#    if in_play == True:
-#        canvas.draw_image(card_back, [CARD_BACK_CENTER[0],
-#                        CARD_BACK_CENTER[1]], CARD_BACK_SIZE, dealer_card_pos, CARD_BACK_SIZE)
-    
-    for i in range(5):
-        dealer_hand.draw(canvas, dealer_card_pos)
+    if in_play == True:
+        for i in range(5):
+            dealer_hand.draw(canvas, dealer_card_pos)
+        canvas.draw_image(card_back, (36, 48), CARD_BACK_SIZE, dealer_card_pos, CARD_BACK_SIZE)
+        
+    else:
+        for i in range(5):
+            dealer_hand.draw(canvas, dealer_card_pos)
         
     player_card_pos = [200, 450]
     
