@@ -141,11 +141,24 @@ def hit():
          print "Player: ", player_hand
          if player_hand.get_value() > 21:
                 print "You have busted!"
+                in_play = False
    
     # if busted, assign a message to outcome, update in_play and score
        
 def stand():
-    pass	# replace with your code below
+    if in_play == False:
+        print "Remember: You have busted!"
+    else:
+        while dealer_hand.get_value() < 17:
+            dealer_hand.add_card(new_deck.deal_card())
+            print "Dealer: ", dealer_hand
+        if dealer_hand.get_value() > 21:
+            print "The dealer has busted!"
+        else:
+            if player_hand.get_value() > dealer_hand.get_value():
+                print "Player wins!"
+            else:
+                print "Dealer wins!"
    
     # if hand is in play, repeatedly hit dealer until his hand has value 17 or more
 
