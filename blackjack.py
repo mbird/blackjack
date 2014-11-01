@@ -112,7 +112,7 @@ class Deck:
 
 #define event handlers for buttons
 def deal():
-    global outcome, in_play, player_hand, dealer_hand
+    global outcome, in_play, player_hand, dealer_hand, new_deck
 
     # create and shuffle the deck
     new_deck = Deck()
@@ -134,9 +134,13 @@ def deal():
     in_play = True
 
 def hit():
-    pass	# replace with your code below
- 
+    global outcome, in_play, player_hand, dealer_hand, new_deck
     # if the hand is in play, hit the player
+    if player_hand.get_value() <= 21:
+         player_hand.add_card(new_deck.deal_card())
+         print "Player: ", player_hand
+         if player_hand.get_value() > 21:
+                print "You have busted!"
    
     # if busted, assign a message to outcome, update in_play and score
        
